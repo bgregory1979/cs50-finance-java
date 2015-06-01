@@ -21,6 +21,7 @@ public class User extends AbstractEntity {
 
     private String userName;
     private String hash;
+    private double cash;
 
     /**
      * A collection of all the StockHoldings this user owns. The keys are stock symbols, ie "YHOO"
@@ -29,9 +30,10 @@ public class User extends AbstractEntity {
 
     // TODO - add cash to user class
 
-    public User(String userName, String password) {
+    public User(String userName, String password, double cash) {
         this.hash = PasswordHash.getHash(password);
         this.userName = userName;
+        this.cash = cash;
         this.portfolio = new HashMap<String, StockHolding>();
     }
 
@@ -56,6 +58,16 @@ public class User extends AbstractEntity {
 
     protected void setHash(String hash) {
         this.hash = hash;
+    }
+
+    @NotNull
+    @Column(name = "cash", unique = true, nullable = false)
+    public double getCash() {
+        return cash;
+    }
+
+    public void setCash(double cash){
+        this.cash = cash;
     }
 
     @OneToMany(cascade = CascadeType.PERSIST)

@@ -11,7 +11,27 @@
     <div id="middle">
 
         <!-- TODO - Display portfolio -->
-        <p>Portfolio!</p>
+        <table>
+            <tr>
+                <th>NAME</th>
+                <th>SHARES</th>
+                <th>CURRENT PRICE</th>
+                <th>CURRENT VALUE</th>
+            </tr>
+            <tr th:each="entry : ${holdings}">
+                <td th:text="${entry.value.name}"></td>
+                <td th:text="${entry.value.shares}"></td>
+                <td th:text="${entry.value.currentPrice}"></td>
+                <td th:text="${entry.value.totalValue}"></td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td>CASH</td>
+                <td th:text="${cash}"></td>
+            </tr>
+        </table>
 
     </div>
 

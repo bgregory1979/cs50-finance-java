@@ -32,3 +32,12 @@
     /* surround with whitespace */
     margin: 20px;
 }
+
+table, th, td {
+    text-align: center;
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}

@@ -60,7 +60,7 @@ public class StockHolding extends AbstractEntity {
     }
 
     protected void setSymbol(String symbol) {
-        this.symbol = symbol;
+        this.symbol = symbol.toUpperCase();
     }
 
     @NotNull
@@ -112,7 +112,7 @@ public class StockHolding extends AbstractEntity {
     private void sellShares(int numberOfShares) throws StockLookupException {
 
         if (numberOfShares > sharesOwned) {
-            throw new IllegalArgumentException("Number to sell exceeds shares owned for stock" + symbol);
+            throw new IllegalArgumentException("Number to sell exceeds shares owned for stock " + symbol);
         }
 
         setSharesOwned(sharesOwned - numberOfShares);
@@ -141,14 +141,13 @@ public class StockHolding extends AbstractEntity {
         StockHolding holding;
 
         // Create new holding, if user has never owned the stock before
-        if (!userPortfolio.containsKey(symbol)) {
-
-            holding = new StockHolding(symbol, user.getUid());
+        if (!userPortfolio.containsKey(symbol.toUpperCase())) {
+            holding = new StockHolding(symbol.toUpperCase(), user.getUid());
             user.addHolding(holding);
         }
 
         // Conduct buy
-        holding = userPortfolio.get(symbol);
+        holding = userPortfolio.get(symbol.toUpperCase());
         holding.buyShares(numberOfShares);
 
         return holding;
@@ -171,12 +170,12 @@ public class StockHolding extends AbstractEntity {
         Map<String, StockHolding> userPortfolio = user.getPortfolio();
         StockHolding holding;
 
-        if (!userPortfolio.containsKey(symbol)) {
+        if (!userPortfolio.containsKey(symbol.toUpperCase())) {
             return null;
         }
 
         // Conduct sale
-        holding = userPortfolio.get(symbol);
+        holding = userPortfolio.get(symbol.toUpperCase());
         holding.sellShares(numberOfShares);
 
         return holding;

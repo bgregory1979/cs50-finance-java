@@ -44,7 +44,7 @@ public class AuthenticationController extends AbstractFinanceController {
         }
 
         // Validation passed. Create and persist a new User entity
-        User newUser = new User(userName, password);
+        User newUser = new User(userName, password, 10000.0);
         userDao.save(newUser);
 
         return "index";
